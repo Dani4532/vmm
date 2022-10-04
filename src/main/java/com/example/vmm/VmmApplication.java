@@ -56,15 +56,11 @@ public class VmmApplication implements ApplicationRunner {
                                                                     LocalDate.parse(splitted[1]),
                                                                     Integer.parseInt(splitted[3]
                                                                     )));
-                // LazyInitialiazationException
-
                 var studentGradeList = studentRepository.findById(splitted[0]).get().getGrades();
                 var student = studentRepository.findById(splitted[0]).get();
                 studentGradeList.add(saved);
                 student.setGrades(studentGradeList);
                 studentRepository.save(student);
-
-
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -72,23 +68,5 @@ public class VmmApplication implements ApplicationRunner {
             throw new RuntimeException(e);
         }
 
-
-            /*
-        var in = Files.lines(Path.of("C:\\Users\\danie\\OneDrive\\Schuljahr22-23\\Programieren\\thymeleaf-basics\\vmm\\src\\main\\resources\\grades.csv"));
-        var grades = in.toList();
-        var newGrades = grades.subList(1, grades.size());
-        newGrades.forEach(grade -> {
-            var array = grade.split(",");
-            if (!(array[0] == "student_id")) {
-                var saved = gradeRepository.save(new Grade(null, array[0], array[2], LocalDate.parse(array[1]), Integer.parseInt(array[3])));
-                var studentGradeList = studentRepository.findById(array[0]).get().getGrades();
-                var student = studentRepository.findById(array[0]).get();
-                studentGradeList.add(saved);
-                student.setGrades(studentGradeList);
-                studentRepository.save(student);
-            }
-        });
-
-             */
     }
 }

@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 @Controller
-public class StudentController{
+public class StudentController {
 
     final private StudentRepository studentRepository;
     final private GradeRepository gradeRepository;
@@ -29,10 +29,9 @@ public class StudentController{
 
 
     @GetMapping("/students")
-    public String getAllStudents(@RequestParam(name = "studentId", required = false) String studentId,@RequestParam(name = "subject", required = false) String subject, @RequestParam(name = "radio", required = false) Integer grade, @RequestParam(name = "date", required = false) String date, Model model) throws IOException, InterruptedException {
+    public String getAllStudents(@RequestParam(name = "studentId", required = false) String studentId, @RequestParam(name = "subject", required = false) String subject, @RequestParam(name = "radio", required = false) Integer grade, @RequestParam(name = "date", required = false) String date, Model model) throws IOException, InterruptedException {
 
-
-        if (!(studentId == null)){
+        if (!(studentId == null)) {
             var student = studentRepository.findById(studentId).get();
             var grades = student.getGrades();
             var newGrade = new Grade(null, studentId, subject, LocalDate.parse(date), grade);
@@ -48,7 +47,7 @@ public class StudentController{
     }
 
     @GetMapping("/detail/{id}")
-    public String getDetailtoStudent(@PathVariable String id, Model model){
+    public String getDetailtoStudent(@PathVariable String id, Model model) {
         model.addAttribute("student", studentRepository.findById(id).get());
         return "detailPage";
     }
