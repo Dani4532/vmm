@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+</head>
+<style>
+    body{
+        max-width: 400px;
+        margin: auto;
+    }
+</style>
+<body>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Grade</th>
+    </tr>
+    <tr th:each="con : ${content}" >
+        <th th:text="${con.firstName} + ' ' + ${con.lastName}"></th>
+        <th>
+            <a th:href="@{detail/{id} (id=${con.id})}" th:text="${con.grades.size} + ' Grades'"></a>
+        </th>
+    </tr>
+</table>
+</body>
+</html>
